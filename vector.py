@@ -7,9 +7,7 @@ import os
 import time
 
 
-# ============================================================
-# CONFIG
-# ============================================================
+# Configs
 
 CSV_FILE = "dataset/myanimelist.csv"
 DB_LOCATION = "./chroma_langchain_db"
@@ -18,16 +16,12 @@ COLLECTION_NAME = "anime_database"
 EMBEDDING_MODEL = "mxbai-embed-large"
 
 # Number of documents sent to Ollama per embedding request.
-# Increase if your system handles it well.
 BATCH_SIZE = 64
 
 # Number of results returned by the retriever.
 TOP_K = 5
 
-
-# ============================================================
-# LOAD DATA
-# ============================================================
+# Loading the dataset
 
 print("\nLoading anime dataset...")
 
@@ -36,17 +30,12 @@ df = pd.read_csv(CSV_FILE)
 print(f"Loaded {len(df):,} anime records.")
 
 
-# ============================================================
-# CLEAN DATA
-# ============================================================
+# Cleaning in case we got some Nulls or empty stuff
 
-# Replace NaN values with empty strings.
 df = df.fillna("")
 
 
-# ============================================================
-# EMBEDDING MODEL
-# ============================================================
+# Embedding model used
 
 print(f"\nLoading embedding model: {EMBEDDING_MODEL}")
 
@@ -55,9 +44,7 @@ embeddings = OllamaEmbeddings(
 )
 
 
-# ============================================================
-# VECTOR STORE
-# ============================================================
+# Initialising the VectorDB
 
 vector_store = Chroma(
     collection_name=COLLECTION_NAME,
@@ -65,10 +52,7 @@ vector_store = Chroma(
     embedding_function=embeddings
 )
 
-
-# ============================================================
-# CREATE DOCUMENTS
-# ============================================================
+# Creating Documents, for each row to hold data and related attributes chronologically in this case
 
 documents = []
 ids = []
@@ -84,11 +68,7 @@ for _, row in df.iterrows():
     genre = str(row["genre"]).strip()
     aired = str(row["aired"]).strip()
 
-    # --------------------------------------------------------
     # Text that gets embedded
-    #
-    # Keep this focused on semantic information.
-    # --------------------------------------------------------
 
     page_content = f"""
 Title: {title}
@@ -103,10 +83,7 @@ Aired:
 {aired}
 """.strip()
 
-    # --------------------------------------------------------
     # Metadata is stored separately.
-    # It does NOT need to be part of the embedding.
-    # --------------------------------------------------------
 
     metadata = {
         "uid": anime_id,
@@ -133,9 +110,7 @@ Aired:
 print(f"Prepared {len(documents):,} documents.")
 
 
-# ============================================================
-# CHECK EXISTING DATABASE
-# ============================================================
+# Check for existing DB so we dont have to re vectorise again
 
 print("\nChecking existing vector database...")
 
@@ -166,9 +141,7 @@ print(f"Already indexed: {len(existing_ids):,}")
 print(f"New documents:   {len(new_documents):,}")
 
 
-# ============================================================
-# EMBEDDING + INSERTION
-# ============================================================
+# Embed + Insert
 
 if new_documents:
 
@@ -225,9 +198,7 @@ else:
     print("\nVector database is already up to date.")
 
 
-# ============================================================
-# RETRIEVER
-# ============================================================
+# retrieve  
 
 retriever = vector_store.as_retriever(
     search_kwargs={
