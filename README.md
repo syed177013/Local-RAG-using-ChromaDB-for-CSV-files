@@ -8,6 +8,8 @@ The project uses an anime dataset as a local knowledge base. Each anime entry is
 
 The entire pipeline runs locally without requiring an external LLM API. This Repo uses an Anime Dataset CSV but the Real time Applications are vast. So dont you dare turn away just because its "RAGing" on Anime related data <:
 
+ALSO this is a CSV file we are talking about, The one i used is literally ~19k rows so Vectorising all that does take some time depending on your Hardware when running locally, Unfortunately no Shortcuts there. For my 4gb vram it took a decent 19 mins for it to completely process the CSV (Happens only during first time running the program) and store in the Vector Database. Wish you Luck when running on yours 
+
 ## How It Works
 
 ```text
