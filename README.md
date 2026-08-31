@@ -6,7 +6,7 @@ A lightweight **local Retrieval-Augmented Generation (RAG)** application built w
 
 The project uses an anime dataset as a local knowledge base. Each anime entry is converted into a LangChain document and embedded using a locally running embedding model. The embeddings are stored in ChromaDB, allowing user questions to retrieve semantically relevant anime before passing the retrieved context to a local LLM.
 
-The entire pipeline runs locally without requiring an external LLM API.
+The entire pipeline runs locally without requiring an external LLM API. This Repo uses an Anime Dataset CSV but the Real time Applications are vast. So dont you dare turn away just because its "RAGing" on Anime related data <:
 
 ## How It Works
 
