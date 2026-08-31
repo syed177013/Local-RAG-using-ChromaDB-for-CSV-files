@@ -10,7 +10,7 @@ The entire pipeline runs locally without requiring an external LLM API. This Rep
 
 Using this with your own CSV file requires minor tweaks to the "page_content" parameter in vector.py file so as to let LLM know what its looking at.
 
-PS this is a CSV file we are talking about, The one i used is literally ~19k rows so Vectorising all that does take some time depending on your Hardware when running locally, Unfortunately no Shortcuts there. For my 4gb vram it took a decent 19 mins for it to completely process the CSV (Happens only during first time running the program) and store in the Vector Database. Wish you Luck when running on yours 
+PS this is a CSV file we are talking about, The one i used is literally ~19k rows so Vectorising all that does take some time depending on your Hardware when running locally, Unfortunately no Shortcuts there. For my 4gb vram it took a decent 19 mins for it to completely process the CSV (Happens only during first time running the program) and store in the Vector Database. Wishing your hardware a happy execution. 
 
 ## How It Works
 
