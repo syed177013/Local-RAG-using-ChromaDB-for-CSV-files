@@ -115,8 +115,8 @@ The `chroma_langchain_db/` directory is generated locally during the first index
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/syed177013/Local-RAG-using-ChromaDB-for-CSV-files.git
+cd Local-RAG-using-ChromaDB-for-CSV-files
 ```
 
 ### 2. Install dependencies
@@ -136,7 +136,7 @@ ollama pull llama3.2
 ollama pull mxbai-embed-large
 ```
 
-### 4. Build the Vector Database
+### 4. Build the Vector Database OR directly go to Step 5.
 
 On the first run, the anime dataset is processed and embedded into ChromaDB.
 
